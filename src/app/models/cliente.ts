@@ -1,3 +1,5 @@
+import { Conta } from "./conta";
+
 export class Cliente {
     private _nome: string;
     private _cpf: number;

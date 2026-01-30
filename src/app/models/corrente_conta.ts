@@ -2,8 +2,21 @@ import { Conta } from "./conta";
 import { Cliente } from "./cliente";
 
 export class Corrente extends Conta {
+    private taxa = 0.01
 
-    constructor(cliente_titular: Cliente, data_criacao_conta: Date) {
-        super(cliente_titular, data_criacao_conta)
+    constructor(cliente_titular: Cliente, saldo: number) {
+        super(cliente_titular, saldo)
+    }
+
+
+    override debitar(valor: number) {
+        let saldo_atual = this.consultar_saldo()
+
+        const valor_taxado = valor + (valor * this.taxa)
+        if (saldo_atual < valor_taxado) {
+            return undefined
+        }
+        this.saldo -= valor
+        return true
     }
 }

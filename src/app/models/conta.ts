@@ -5,10 +5,40 @@ export abstract class Conta {
     protected _cliente_titular: Cliente
     protected _data_criacao_conta: Date
 
-    constructor(cliente_titular: Cliente, data_criacao_conta: Date) {
-        this._saldo = 0
+    constructor(cliente_titular: Cliente, saldo: number) {
+        this._saldo = saldo || 0 
         this._cliente_titular = cliente_titular
-        this._data_criacao_conta = data_criacao_conta
+        this._data_criacao_conta = new Date()
+    }
+
+    protected consultar_saldo(): number {
+        return this.saldo
+    }
+
+    protected creditar(valor: number) {
+        if (valor <= 0) {
+            return;
+        }
+        this.saldo += valor
+    }
+
+    protected debitar(valor: number) {
+        let saldo_atual = this.consultar_saldo()
+
+        if (saldo_atual < valor) {
+            return undefined
+        }
+        this.saldo -= valor
+        return true
+    }
+
+    protected trasferir(cliente_creditar: Conta, valor_transferir: number) {
+        let valor_debitado = this.debitar(valor_transferir)
+        if (valor_debitado = undefined) {
+            return false
+        }
+        cliente_creditar.creditar(valor_transferir)
+        return true
     }
 
     
