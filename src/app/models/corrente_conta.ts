@@ -10,7 +10,7 @@ export class Corrente extends Conta {
 
 
     override debitar(valor: number) {
-        let saldo_atual = this.consultar_saldo()
+        let saldo_atual = this.consultarSaldo()
 
         const valor_taxado = valor + (valor * this.taxa)
         if (saldo_atual < valor_taxado) {

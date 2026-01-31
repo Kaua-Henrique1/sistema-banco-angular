@@ -5,37 +5,47 @@ import { Poupanca } from "./poupanca_conta";
 
 export class Funcionario {
     _cliente: Cliente
-    _conta: Conta
+    _contaCorrente: Corrente
+    _contaPoupanca: Poupanca
 
-    constructor(cliente: Cliente, conta: Conta) {
+    constructor(cliente: Cliente, corrente: Corrente, poupanca: Poupanca) {
         this._cliente = cliente
-        this._conta = conta
+        this._contaCorrente = corrente
+        this._contaPoupanca = poupanca
     }
 
-    criar_conta(cliente: Cliente, saldo_inicial: number, escolha_conta: number) {
-        if (escolha_conta == 0) {
-            new Poupanca(cliente, saldo_inicial)       
+    criarConta(cliente: Cliente, saldoInicial: number, escolhaConta: string) {
+        let novaContaCorrente;
+        let novaContaPoupanca;
+        if (escolhaConta == 'CORRENTE') {
+            novaContaCorrente = new Corrente(cliente, saldoInicial)       
         } else {
-            new Corrente(cliente, saldo_inicial)       
+            novaContaPoupanca = new Poupanca(cliente, saldoInicial)       
+        }
+
+        if (novaContaCorrente == null) {
+            return novaContaPoupanca
+        } else {
+            return novaContaCorrente
         }
     }
 
-    autorizar_emprestimo(cliente: Cliente, valor_empresto: number) {
+    autorizarEmprestimo(cliente: Cliente, valorEmpresto: number) {
         const renda_bruta_30 = (cliente.renda_bruta * 0.3) 
-        if (valor_empresto <= renda_bruta_30) {
+        if (valorEmpresto <= renda_bruta_30) {
             return true
         }
         return false
     }
 
-    realizar_emprestimo(cliente: Cliente, valor_empresto: number) {
-        let isTrue = this.autorizar_emprestimo(cliente, valor_empresto)  
+    realizarEmprestimo(contaDestino: Conta, valorEmpresto: number) {
+        let cliente = contaDestino.clienteTitular
+
+        let isTrue = this.autorizarEmprestimo(cliente, valorEmpresto)  
         if (!isTrue) {
             return false
         }
-        if (this.conta.cliente_titular == cliente) {
-        }
-
+        return true
     }
     
     public set cliente(v : Cliente) {
@@ -45,10 +55,24 @@ export class Funcionario {
         return this._cliente
     }
     
-    public set conta(v : Conta) {
-        this._conta = v;
+    public set poupanca(v : Poupanca) {
+        this._contaPoupanca = v;
     }
-    public get conta() : Conta {
-        return this._conta
+    public get poupanca() : Poupanca {
+        return this._contaPoupanca
+    }
+
+    public set corrente(v : Corrente) {
+        this._contaCorrente = v;
+    }
+    public get corrente() : Corrente {
+        return this._contaCorrente
+    }
+
+    public set conta(v : Corrente) {
+        this._contaCorrente = v;
+    }
+    public get conta() : Corrente {
+        return this._contaCorrente
     }
 }

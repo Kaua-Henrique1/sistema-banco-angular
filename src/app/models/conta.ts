@@ -2,16 +2,17 @@ import { Cliente } from "./cliente"
 
 export abstract class Conta {
     protected _saldo: number
-    protected _cliente_titular: Cliente
-    protected _data_criacao_conta: Date
+    protected _clienteTitular: Cliente
+    protected _dataCriacaoConta: Date
+    protected contas: Conta[] = [];
 
-    constructor(cliente_titular: Cliente, saldo: number) {
+    constructor(clienteTitular: Cliente, saldo: number) {
         this._saldo = saldo || 0 
-        this._cliente_titular = cliente_titular
-        this._data_criacao_conta = new Date()
+        this._clienteTitular = clienteTitular
+        this._dataCriacaoConta = new Date()
     }
 
-    protected consultar_saldo(): number {
+    protected consultarSaldo(): number {
         return this.saldo
     }
 
@@ -23,7 +24,7 @@ export abstract class Conta {
     }
 
     protected debitar(valor: number) {
-        let saldo_atual = this.consultar_saldo()
+        let saldo_atual = this.consultarSaldo()
 
         if (saldo_atual < valor) {
             return undefined
@@ -32,12 +33,12 @@ export abstract class Conta {
         return true
     }
 
-    protected trasferir(cliente_creditar: Conta, valor_transferir: number) {
-        let valor_debitado = this.debitar(valor_transferir)
+    protected trasferir(clienteCreditar: Conta, valorTransferir: number) {
+        let valor_debitado = this.debitar(valorTransferir)
         if (valor_debitado = undefined) {
             return false
         }
-        cliente_creditar.creditar(valor_transferir)
+        clienteCreditar.creditar(valorTransferir)
         return true
     }
 
@@ -50,17 +51,17 @@ export abstract class Conta {
     }
     
     
-    public get cliente_titular() : Cliente {
-        return this._cliente_titular
+    public get clienteTitular() : Cliente {
+        return this._clienteTitular
     }
-    public set cliente_titular(v : Cliente) {
-        this._cliente_titular = v;
+    public set clienteTitular(v : Cliente) {
+        this._clienteTitular = v;
     }
     
-    public get data_criacao_conta() : Date {
-        return this._data_criacao_conta
+    public get dataCriacaoConta() : Date {
+        return this._dataCriacaoConta
     }
-    public set data_criacao_conta(v : Date) {
-        this._data_criacao_conta = v;
+    public set dataCriacaoConta(v : Date) {
+        this._dataCriacaoConta = v;
     }
 }
