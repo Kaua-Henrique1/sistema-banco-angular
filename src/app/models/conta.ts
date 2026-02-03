@@ -3,27 +3,27 @@ import { Cliente } from "./cliente"
 export abstract class Conta {
     protected _saldo: number
     protected _clienteTitular: Cliente
-    protected _dataCriacaoConta: Date
+    protected _dataCriacaoConta: string
     protected contas: Conta[] = [];
 
     constructor(clienteTitular: Cliente, saldo: number) {
         this._saldo = saldo || 0 
         this._clienteTitular = clienteTitular
-        this._dataCriacaoConta = new Date()
+        this._dataCriacaoConta = '';
     }
 
     protected consultarSaldo(): number {
         return this.saldo
     }
 
-    protected creditar(valor: number) {
+    public creditar(valor: number) {
         if (valor <= 0) {
             return;
         }
         this.saldo += valor
     }
 
-    protected debitar(valor: number) {
+    public debitar(valor: number) {
         let saldo_atual = this.consultarSaldo()
 
         if (saldo_atual < valor) {
@@ -35,7 +35,7 @@ export abstract class Conta {
 
     protected trasferir(clienteCreditar: Conta, valorTransferir: number) {
         let valor_debitado = this.debitar(valorTransferir)
-        if (valor_debitado = undefined) {
+        if (valor_debitado === undefined) {
             return false
         }
         clienteCreditar.creditar(valorTransferir)
@@ -58,10 +58,10 @@ export abstract class Conta {
         this._clienteTitular = v;
     }
     
-    public get dataCriacaoConta() : Date {
+    public get dataCriacaoConta() : string {
         return this._dataCriacaoConta
     }
-    public set dataCriacaoConta(v : Date) {
+    public set dataCriacaoConta(v : string) {
         this._dataCriacaoConta = v;
     }
 }

@@ -1,7 +1,8 @@
 import { Cliente } from "./cliente";
 import { Conta } from "./conta";
-import { Corrente } from "./corrente_conta";
-import { Poupanca } from "./poupanca_conta";
+import { Corrente } from "./correnteConta";
+import { Poupanca } from "./poupancaConta";
+import { TipoConta } from "./tipoConta";
 
 export class Funcionario {
     _cliente: Cliente
@@ -14,10 +15,10 @@ export class Funcionario {
         this._contaPoupanca = poupanca
     }
 
-    criarConta(cliente: Cliente, saldoInicial: number, escolhaConta: string) {
+    criarConta(cliente: Cliente, saldoInicial: number, escolhaConta: TipoConta) {
         let novaContaCorrente;
         let novaContaPoupanca;
-        if (escolhaConta == 'CORRENTE') {
+        if (escolhaConta == TipoConta.CORRENTE) {
             novaContaCorrente = new Corrente(cliente, saldoInicial)       
         } else {
             novaContaPoupanca = new Poupanca(cliente, saldoInicial)       
@@ -42,10 +43,11 @@ export class Funcionario {
         let cliente = contaDestino.clienteTitular
 
         let isTrue = this.autorizarEmprestimo(cliente, valorEmpresto)  
-        if (!isTrue) {
-            return false
+        if (isTrue) {
+            contaDestino.creditar(valorEmpresto)
+            return true
         }
-        return true
+        return false
     }
     
     public set cliente(v : Cliente) {

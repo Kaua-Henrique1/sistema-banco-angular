@@ -1,13 +1,11 @@
-import { Conta } from "./conta";
-
 export class Cliente {
     private _nome: string;
     private _cpf: number;
-    private _dataNascimento: number;
+    private _dataNascimento: string;
     private _rendaBruta: number;
     private _telefone: number;
 
-    constructor(nome: string, dataNascimento: number,rendaBruta: number,cpf: number,telefone: number,) {
+    constructor(nome: string, dataNascimento: string,rendaBruta: number,cpf: number,telefone: number,) {
         this._nome = nome
         this._cpf = cpf
         this._rendaBruta = rendaBruta
@@ -29,10 +27,10 @@ export class Cliente {
         this._cpf = v;
     }
 
-    public get dataNascimento(): number {
+    public get dataNascimento(): string {
         return this._dataNascimento
     }
-    public set dataNascimento(v: number) {
+    public set dataNascimento(v: string) {
         this._dataNascimento = v;
     }
 
