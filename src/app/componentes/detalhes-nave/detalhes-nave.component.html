@@ -1,0 +1,18 @@
+@if (nave) {
+        <div class="painel-detalhe">
+            <img [src]="'https://starwars-visualguide.com/assets/img/starships/' + id + '.jpg'" 
+                 class="img-grande">
+
+            <div class="infos">
+                <h1>{{ nave.name }}</h1> <p><strong>Modelo:</strong> {{ nave.model }}</p>
+                <p><strong>Fabricante:</strong> {{ nave.manufacturer }}</p>
+                <p><strong>Velocidade Máx:</strong> {{ nave.max_atmosphering_speed }}</p>
+                <p><strong>Custo:</strong> {{ nave.cost_in_credits }} Créditos</p>
+                <p><strong>Passageiros:</strong> {{ nave.passengers }}</p>
+                
+                <button routerLink="/" class="btn-voltar">Voltar para a Frota</button>
+            </div>
+        </div>
+    } @else {
+        <p>Carregando dados da nave...</p>
+    }

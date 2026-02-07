@@ -1,0 +1,11 @@
+<p>Listagem da Naves</p>
+
+@for (nave of listaNaves; track $index) {
+    <div>
+        <img>
+
+        <h3>{{ nave.modelo }}</h3>
+
+        <button [routerLink]="['/nave', nave.id]">Ver Detalhes</button>
+    </div>
+}
