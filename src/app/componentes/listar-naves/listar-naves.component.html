@@ -1,11 +1,22 @@
-<p>Listagem da Naves</p>
+<div class="container" style="color: white; padding: 20px;">
+  
+  <h2>Listagem de Naves</h2>
+  <hr />
 
-@for (nave of listaNaves; track $index) {
-    <div>
-        <img>
+  <button (click)="buscarNaves()">Buscar Naves</button>
 
-        <h3>{{ nave.modelo }}</h3>
+  <ul>
+    @for (nave of listaNaves; track nave.id) {
+      <li>
+        <strong>{{ nave.modelo }}</strong> ({{ nave.descricao }})
+        
+        <a [routerLink]="['/nave', nave.id]">Detalhes</a>
+      </li>
+    }
+    
+    @if (listaNaves.length === 0) {
+      <p>Clique no botão acima para carregar as naves.</p>
+    }
+  </ul>
 
-        <button [routerLink]="['/nave', nave.id]">Ver Detalhes</button>
-    </div>
-}
+</div>

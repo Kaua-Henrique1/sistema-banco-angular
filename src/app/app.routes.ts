@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
+import { ListarNavesComponent } from './componentes/listar-naves/listar-naves.component';
+import { DetalhesNaveComponent } from './componentes/detalhes-nave/detalhes-nave.component';
 
 export const routes: Routes = [
-  { path: '', loadComponent: () => import('./componentes/listar-naves/listar-naves.component').then(m => m.ListarNavesComponent) },
-  { path: 'nave/:id', loadComponent: () => import('./componentes/detalhes-nave/detalhes-nave.component').then(m => m.DetalhesNaveComponent)}
-
+  { path: '', component: ListarNavesComponent },
+  { path: 'nave/:id', component: DetalhesNaveComponent }
 ];

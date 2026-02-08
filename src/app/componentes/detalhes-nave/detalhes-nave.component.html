@@ -1,18 +1,31 @@
-@if (nave) {
-        <div class="painel-detalhe">
-            <img [src]="'https://starwars-visualguide.com/assets/img/starships/' + id + '.jpg'" 
-                 class="img-grande">
+<div class="container-detalhes">
 
-            <div class="infos">
-                <h1>{{ nave.name }}</h1> <p><strong>Modelo:</strong> {{ nave.model }}</p>
-                <p><strong>Fabricante:</strong> {{ nave.manufacturer }}</p>
-                <p><strong>Velocidade Máx:</strong> {{ nave.max_atmosphering_speed }}</p>
-                <p><strong>Custo:</strong> {{ nave.cost_in_credits }} Créditos</p>
-                <p><strong>Passageiros:</strong> {{ nave.passengers }}</p>
-                
-                <button routerLink="/" class="btn-voltar">Voltar para a Frota</button>
+    @if (nave(); as n) {
+
+    <div class="card-detalhe">
+        <div>
+            <h1>{{ n.modelo }}</h1>
+            <p class="subtitulo">{{ n.descricao }}</p>
+
+            <div class="imagem-box">
+                <img [src]="imagemUrl()" [alt]="n.modelo" class="foto-nave">
             </div>
+
+            <div class="info-box">
+                <p><strong> Velocidade:</strong> {{ n.max_velocidade }} km/h</p>
+                <p><strong> Tripulação:</strong> {{ n.equipe }}</p>
+                <hr />
+                <p><strong> Custo:</strong> {{ formatarValor(n.valor_creditos) }} Créditos</p>
+                <p>(1 crédito imperial de Star Wars vale cerca de 4 dólares)</p>
+                <hr />
+            </div>
+
+            <a routerLink="/" class="btn-voltar"> Voltar para a Frota</a>
         </div>
+    </div>
+
     } @else {
-        <p>Carregando dados da nave...</p>
+    <p>Carregando dados da nave...</p>
     }
+
+</div>

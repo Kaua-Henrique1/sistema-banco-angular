@@ -1,37 +1,10 @@
-<div class="fundo-galaxia">
-  <div class="container">
-    
-    <h1 class="titulo">🚀 Garagem Intergaláctica</h1>
+<router-outlet></router-outlet>
+<hr/>
 
-    <div class="grid-naves">
-      
-      @for (nave of listaNaves; track nave.id) {
-        <div class="card">
-          
-          <div class="card-imagem">
-            <img 
-              [src]="'https://starwars-visualguide.com/assets/img/starships/' + nave.id + '.jpg'" 
-              alt="{{ nave.modelo }}"
-              onerror="this.src='https://starwars-visualguide.com/assets/img/placeholder.jpg'"
-            >
-          </div>
+<body>
 
-          <div class="card-conteudo">
-            <h2>{{ nave.modelo }}</h2>
-            <p class="descricao">{{ nave.descricao }}</p>
-            
-            <div class="detalhes-rapidos">
-              <span>⚡ {{ nave.max_velocidade }}</span>
-              <span>👥 {{ nave.equipe }} Tripulantes</span>
-            </div>
+</body>
 
-            <p class="preco">💰 {{ nave.valor_creditos }} Créditos</p>
-          </div>
-
-        </div>
-      }
-
-    </div>
-
-  </div>
-</div>
+<footer class="rodape">
+  <p>Aplicação de Listagem das Naves de Star Wars</p>
+</footer>
