@@ -9,10 +9,10 @@
 }
 
 .card-detalhe {
-  background-color: #333; /* Fundo escuro */
-  color: white; /* Texto claro */
-  text-align: center; /* Centralizado */
-  padding: 15px; /* Espaçamento interno */
+  background-color: #333;
+  color: white; 
+  text-align: center; 
+  padding: 15px; 
   width: 100%;
 }
 
